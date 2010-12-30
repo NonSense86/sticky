@@ -661,6 +661,10 @@ public class Model {
      * @param content
      */
     public void updateNoteContent(final Note note, List<Comment> comments) {
+        int idx = comments.size() - 1;
+        if (idx >= 0) {
+            notifyCommentAdded(comments.get(idx));
+        }
         taskQueue.post(new UpdateNoteContentTask(note, comments));
     }
     

@@ -26,6 +26,7 @@ public class CommentView extends VerticalPanel implements KeyDownHandler, Model.
     private final TextArea taComment = new TextArea();
     
     private List<Comment> comments = new ArrayList<Comment>();
+
     
     public CommentView(Model model, Note note) {
         this.model = model;
@@ -57,7 +58,7 @@ public class CommentView extends VerticalPanel implements KeyDownHandler, Model.
 	            this.taComment.setText("");
 	            
 	            final Comment comment = new Comment(this.note.getKey(), this.model.getCurrentAuthor().getName(), text);
-	            this.addComment(comment);
+	           // this.addComment(comment);
 	            this.comments.add(comment);
 	            this.model.updateNoteContent(this.note, this.comments);
             }

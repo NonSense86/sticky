@@ -123,6 +123,7 @@ body {
 .note-content {
   margin: 5px;
   background: transparent;
+  width: 95%;
   border: none;
   overflow: hidden;
 }

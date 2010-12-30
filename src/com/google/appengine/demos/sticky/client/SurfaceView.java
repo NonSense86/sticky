@@ -33,6 +33,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -51,7 +52,7 @@ public class SurfaceView extends FlowPanel implements Model.DataObserver {
      * A widget for displaying a single {@link Note}.
      */
     private class NoteView extends SimplePanel implements Note.Observer, MouseUpHandler, MouseDownHandler,
-        MouseMoveHandler, ValueChangeHandler<String> {
+        MouseMoveHandler, ValueChangeHandler<String>, Model.DataObserver {
         private final Note note;
         
         private final DivElement titleElement;
@@ -96,11 +97,10 @@ public class SurfaceView extends FlowPanel implements Model.DataObserver {
                 }
             });
             
-            pnlComments = new CommentView(model, note);
+            
             add(panel);
             render();
-            photoTransformView = new PhotoTransformView(model, note);
-            panel.add(photoTransformView);
+            
             addDomHandler(this, MouseDownEvent.getType());
             addDomHandler(this, MouseMoveEvent.getType());
             addDomHandler(this, MouseUpEvent.getType());
@@ -171,16 +171,58 @@ public class SurfaceView extends FlowPanel implements Model.DataObserver {
             if (photo != null) {
                 //panel.remove(photoView);
                 panel.clear();
+                photoTransformView = new PhotoTransformView(model, note);
+                panel.add(photoTransformView);
             	panel.add(photo);
             } else {
                 panel.add(photoView.getFileUploaderWidget());
             }
+            if (pnlComments != null) {
+                panel.remove(pnlComments);
+            }
+            pnlComments = new CommentView(model, note);
             panel.add(pnlComments);
             
         }
         
         private void select() {
             getElement().getStyle().setProperty("zIndex", "" + nextZIndex());
+        }
+
+        @Override
+        public void onCommentAdded(Comment comment) {
+            render();
+            
+        }
+
+        @Override
+        public void onNoteCreated(Note note) {
+            // TODO Auto-generated method stub
+            
+        }
+
+        @Override
+        public void onSurfaceCreated(Surface surface) {
+            // TODO Auto-generated method stub
+            
+        }
+
+        @Override
+        public void onSurfaceNotesReceived(Note[] notes) {
+            // TODO Auto-generated method stub
+            
+        }
+
+        @Override
+        public void onSurfaceSelected(Surface nowSelected, Surface wasSelected) {
+            // TODO Auto-generated method stub
+            
+        }
+
+        @Override
+        public void onSurfacesReceived(Surface[] surfaces) {
+            // TODO Auto-generated method stub
+            
         }
     }
     
@@ -246,7 +288,7 @@ public class SurfaceView extends FlowPanel implements Model.DataObserver {
     
     @Override
     public void onCommentAdded(Comment comment) {
-        
+
     }
     
 }
