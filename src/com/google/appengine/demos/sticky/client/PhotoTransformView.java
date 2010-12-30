@@ -48,11 +48,11 @@ public class PhotoTransformView extends HorizontalPanel {
 
     private Callback callback;
 
-	public PhotoTransformView(final Model model, final Note note, Callback callback) {
+	public PhotoTransformView(final Model model, final Note note) {
 
 		this.model = model;
 		this.note = note;
-		this.callback = callback;
+		//this.callback = callback;
 		//System.out.println("Created photoTransformView!");
 		LOG.log(Level.INFO, "Hash: " + this.note.getHashCode());
 		if (this.note.getAuthorName().equals("You") && this.note.getHashCode() != null && this.note.getHashCode() != 0) {

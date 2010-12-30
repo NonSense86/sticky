@@ -170,14 +170,7 @@ public class SurfaceView extends FlowPanel implements Model.DataObserver {
             if (photo != null) {
                 //panel.remove(photoView);
                 panel.clear();
-                photoTransformView = new PhotoTransformView(model, note, new Callback() {
-
-                    @Override
-                    public void callback() {
-                        render();
-                    }
-                    
-                });
+                photoTransformView = new PhotoTransformView(model, note);
                 panel.add(photoTransformView);
             	panel.add(photo);
             } else {
