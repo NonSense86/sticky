@@ -33,7 +33,6 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -171,7 +170,14 @@ public class SurfaceView extends FlowPanel implements Model.DataObserver {
             if (photo != null) {
                 //panel.remove(photoView);
                 panel.clear();
-                photoTransformView = new PhotoTransformView(model, note);
+                photoTransformView = new PhotoTransformView(model, note, new Callback() {
+
+                    @Override
+                    public void callback() {
+                        render();
+                    }
+                    
+                });
                 panel.add(photoTransformView);
             	panel.add(photo);
             } else {

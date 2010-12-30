@@ -38,7 +38,7 @@ public class PhotoTransformView extends HorizontalPanel {
 		@Resource("rotate_90_cc_icon.gif")
 		AbstractImagePrototype headerImageRotateCc();
 		
-		@Resource("i_am_feeling_lucky_icon.jpg")
+		@Resource("i_am_feeling_lucky_icon.gif")
 		AbstractImagePrototype headerImageIAmFeelingLucky();
 	}
 
@@ -46,10 +46,13 @@ public class PhotoTransformView extends HorizontalPanel {
 
 	final private Model model;
 
-	public PhotoTransformView(final Model model, final Note note) {
+    private Callback callback;
+
+	public PhotoTransformView(final Model model, final Note note, Callback callback) {
 
 		this.model = model;
 		this.note = note;
+		this.callback = callback;
 		//System.out.println("Created photoTransformView!");
 		LOG.log(Level.INFO, "Hash: " + this.note.getHashCode());
 		if (this.note.getAuthorName().equals("You") && this.note.getHashCode() != null && this.note.getHashCode() != 0) {
@@ -65,6 +68,7 @@ public class PhotoTransformView extends HorizontalPanel {
 						public void onClick(ClickEvent event) {
 							model.updateNoteImage(PhotoTransformView.this.note, PhotoTransformView.this.note.getHashCode(),
 									Transformation.LUCKY);
+							PhotoTransformView.this.callback.callback();
 						}
 					}));
 
@@ -74,6 +78,7 @@ public class PhotoTransformView extends HorizontalPanel {
 						public void onClick(ClickEvent event) {
 						    model.updateNoteImage(PhotoTransformView.this.note, PhotoTransformView.this.note.getHashCode(),
 									Transformation.FLIP_H);
+						    PhotoTransformView.this.callback.callback();
 						}
 					}));
 
@@ -83,6 +88,7 @@ public class PhotoTransformView extends HorizontalPanel {
 						public void onClick(ClickEvent event) {
 						    model.updateNoteImage(PhotoTransformView.this.note, PhotoTransformView.this.note.getHashCode(),
 									Transformation.FLIP_V);
+						    PhotoTransformView.this.callback.callback();
 						}
 					}));
 
@@ -92,6 +98,7 @@ public class PhotoTransformView extends HorizontalPanel {
 						public void onClick(ClickEvent event) {
 						    model.updateNoteImage(PhotoTransformView.this.note, PhotoTransformView.this.note.getHashCode(),
 									Transformation.ROT_C);
+						    PhotoTransformView.this.callback.callback();
 						}
 					}));
 
@@ -101,6 +108,7 @@ public class PhotoTransformView extends HorizontalPanel {
 						public void onClick(ClickEvent event) {
 						    model.updateNoteImage(PhotoTransformView.this.note, PhotoTransformView.this.note.getHashCode(),
 									Transformation.ROT_CC);
+						    PhotoTransformView.this.callback.callback();
 						}
 					}));
 		}
